@@ -38,3 +38,26 @@ class User(db.Model, UserMixin):
             return user
 
         return None
+
+class Client(db.Model):
+
+    __tablename__ = 'client'
+
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(200))
+    razao_social = db.Column(db.String(200))
+    rua = db.Column(db.String(200))
+    cep = db.Column(db.String(200))
+    bairro = db.Column(db.String(200))
+    cidade = db.Column(db.String(200))
+    dt_cadastro = db.Column(db.DateTime, default=datetime.now())
+    observacao = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<Client %r>' % self.nome
+
+
+# class Charge(db.Model):
+#
+#     __tablename__ = 'charge'
+    

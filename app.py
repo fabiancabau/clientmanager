@@ -8,10 +8,12 @@ from flask.templating import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user
 from flask import flash
 from werkzeug.utils import secure_filename
-from models import db, User
+from models import db, User, Client
 import os
+from client import client
 
 application = Flask(__name__)
+application.register_blueprint(client.bp, url_prefix='/client')
 application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/clientmanager'
 application.secret_key = '0mG`itS4s3cr3t'
 
@@ -60,6 +62,7 @@ def admin():
 def logout():
     logout_user()
     return redirect('login')
+
 
 
 if __name__ == '__main__':
