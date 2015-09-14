@@ -13,8 +13,9 @@ import os
 from client import client
 
 application = Flask(__name__)
+application.debug = True
 application.register_blueprint(client.bp, url_prefix='/client')
-application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/clientmanager'
+application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@127.0.0.1/clientmanager'
 application.secret_key = '0mG`itS4s3cr3t'
 
 # This is the path to the upload directory
@@ -33,7 +34,7 @@ def load_user(userid):
 @application.route('/')
 def index():
 
-    return render_template('index.html')
+    return render_template('template.html')
 
 
 @application.route('/login', methods=['GET', 'POST'])
