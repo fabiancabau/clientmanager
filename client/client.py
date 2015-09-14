@@ -3,15 +3,15 @@ from flask import redirect, request
 from flask_login import login_required
 from models import Client, db
 from flask.templating import render_template
+from flask.views import MethodView
+
 
 bp = Blueprint('client', __name__)
 
 
-@bp.route("/", methods=['GET', 'POST'])
-def client_add():
+class ClientAPI(MethodView):
 
-
-    if request.method == "POST":
+    def post(self):
 
         client = Client()
 
@@ -26,9 +26,12 @@ def client_add():
         db.session.add(client)
         db.session.commit()
 
-    elif request.method == "GET":
+    def get(self):
 
         return render_template('client_add.html')
+
+
+bp.add_url_rule('/client/', view_func=ClientAPI.as_view('client'))
 
 
 
