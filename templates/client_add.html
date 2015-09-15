@@ -2,11 +2,6 @@
 {% block content %}
 
 
-
-<div class="col-md-12 col-xs-12">
-
-    <h1>Cadastro</h1>
-
     <div class="x_panel">
         <div class="x_title">
             <h2>Cliente</h2>
@@ -14,16 +9,16 @@
         </div>
         <div class="x_content">
             <br />
-            <form class="form-horizontal form-label-left input_mask">
+            <form class="form-horizontal form-label-left input_mask" action="/client" method="POST">
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                    <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nome">
+                    <input type="text" class="form-control has-feedback-left" name="nome" id="inputSuccess2" placeholder="Nome">
                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                    <input type="text" class="form-control" id="inputSuccess3" placeholder="Razão Social">
-                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                    <input type="text" class="form-control" id="inputSuccess3" name="" placeholder="Razão Social">
+                    <span class="fa fa-briefcase form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -33,39 +28,41 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                     <input type="text" class="form-control" id="inputSuccess5" placeholder="Cidade">
-                    <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                    <span class="fa fa-building-o form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                     <input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Rua">
-                    <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                    <span class="fa fa-road form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                     <input type="text" class="form-control" id="inputSuccess5" placeholder="CEP">
-                    <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                    <span class="fa fa-map-marker form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
-
-
-
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
-                    </label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                        <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                    </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    <input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Bairro">
+                    <span class="fa fa-home form-control-feedback left" aria-hidden="true"></span>
                 </div>
+
+                <div class="clearfix"></div>
                 <div class="ln_solid"></div>
+
+                <label for="message">Observação:</label>
+                <textarea id="message" class="form-control" name="message"></textarea>
+
+                <div class="clearfix"></div>
+                <div class="ln_solid"></div>
+
                 <div class="form-group">
-                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <button type="submit" class="btn btn-primary">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Enviar</button>
                     </div>
                 </div>
 
             </form>
         </div>
     </div>
-</div>
 {% endblock %}

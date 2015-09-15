@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask import redirect, request
+from flask.helpers import url_for
 from flask_login import login_required
 from models import Client, db
 from flask.templating import render_template
@@ -26,12 +27,14 @@ class ClientAPI(MethodView):
         db.session.add(client)
         db.session.commit()
 
+        return redirect(url_for('.client'))
+
     def get(self):
 
         return render_template('client_add.html')
 
 
-bp.add_url_rule('/client/', view_func=ClientAPI.as_view('client'))
+bp.add_url_rule('/client', view_func=ClientAPI.as_view('client'))
 
 
 
