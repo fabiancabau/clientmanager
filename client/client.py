@@ -27,7 +27,7 @@ class ClientAPIForm(MethodView):
         client.save()
 
         flash('Cliente adicionado com sucesso!', 'Sucesso!')
-        return redirect(url_for('.client'))
+        return redirect(url_for('.ClientAPIForm'))
 
     def get(self):
         return render_template('client_add.html')
@@ -42,25 +42,29 @@ class ClientAPI(MethodView):
 
         client = Client.query.get(id)
 
-        return render_template('client_list.html', context=client)
+        return render_template('client_update.html', client=client)
 
-    def put(self, id=None):
-        pass
+    def post(self, id=None):
+
+        client = Client.query.get(id)
+
+        client.nome =  request.form.get('nome')
+        client.razao_social =  request.form.get('razao_social')
+        client.rua =  request.form.get('rua')
+        client.cep =  request.form.get('cep')
+        client.bairro =  request.form.get('bairro')
+        client.cidade =  request.form.get('cidade')
+        client.observacao =  request.form.get('observacao')
 
 
-bp.add_url_rule('/client/<id>', view_func=ClientAPI.as_view('ClientAPI'))
+bp.add_url_rule('/client/<id>', view_func=ClientAPI.as_view('ClientAPI'), methods=['GET', 'POST'])
 
 
 class ClientAPIList(MethodView):
 
     def get(self, id=None):
 
-        # Client.
-
         return render_template('client_list.html')
-
-    def put(self, id=None):
-        pass
 
 
 bp.add_url_rule('/clients', view_func=ClientAPIList.as_view('ClientAPIList'))
