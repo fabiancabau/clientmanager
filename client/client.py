@@ -10,7 +10,7 @@ from flask.views import MethodView
 bp = Blueprint('client', __name__)
 
 
-class ClientAPI(MethodView):
+class ClientAPIForm(MethodView):
 
     def post(self):
 
@@ -24,17 +24,48 @@ class ClientAPI(MethodView):
         client.cidade =  request.form.get('cidade')
         client.observacao =  request.form.get('observacao')
 
-        db.session.add(client)
-        db.session.commit()
+        client.save()
+
         flash('Cliente adicionado com sucesso!', 'Sucesso!')
         return redirect(url_for('.client'))
 
     def get(self):
-
         return render_template('client_add.html')
 
 
-bp.add_url_rule('/client', view_func=ClientAPI.as_view('client'))
+bp.add_url_rule('/client', view_func=ClientAPIForm.as_view('ClientAPIForm'))
+
+
+class ClientAPI(MethodView):
+
+    def get(self, id=None):
+
+        client = Client.query.get(id)
+
+        return render_template('client_list.html', context=client)
+
+    def put(self, id=None):
+        pass
+
+
+bp.add_url_rule('/client/<id>', view_func=ClientAPI.as_view('ClientAPI'))
+
+
+class ClientAPIList(MethodView):
+
+    def get(self, id=None):
+
+        # Client.
+
+        return render_template('client_list.html')
+
+    def put(self, id=None):
+        pass
+
+
+bp.add_url_rule('/clients', view_func=ClientAPIList.as_view('ClientAPIList'))
+
+
 
 
 

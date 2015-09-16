@@ -57,6 +57,11 @@ class Client(db.Model):
         return '<Client %r>' % self.nome
 
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+
 # class Charge(db.Model):
 #
 #     __tablename__ = 'charge'
