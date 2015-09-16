@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import redirect, request
-from flask.helpers import url_for
+from flask.helpers import url_for, flash
 from flask_login import login_required
 from models import Client, db
 from flask.templating import render_template
@@ -26,7 +26,7 @@ class ClientAPI(MethodView):
 
         db.session.add(client)
         db.session.commit()
-
+        flash('Cliente adicionado com sucesso!', 'Sucesso!')
         return redirect(url_for('.client'))
 
     def get(self):

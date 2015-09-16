@@ -3,6 +3,19 @@
 
 
     <div class="x_panel">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for tipo, message in messages %}
+                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <strong>{{ tipo }}</strong> {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
         <div class="x_title">
             <h2>Cliente</h2>
             <div class="clearfix"></div>
