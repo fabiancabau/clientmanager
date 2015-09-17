@@ -22,6 +22,7 @@ class ClientAPIForm(MethodView):
         client.cep =  request.form.get('cep')
         client.bairro =  request.form.get('bairro')
         client.cidade =  request.form.get('cidade')
+        client.email = request.form.get('email')
         client.observacao =  request.form.get('observacao')
 
         client.save()
@@ -42,7 +43,10 @@ class ClientAPI(MethodView):
 
         client = Client.query.get(id)
 
-        return render_template('client_update.html', client=client)
+        if client:
+            return render_template('client_update.html', client=client)
+        else:
+            return render_template('page_404.html')
 
     def post(self, id=None):
 
@@ -54,7 +58,12 @@ class ClientAPI(MethodView):
         client.cep =  request.form.get('cep')
         client.bairro =  request.form.get('bairro')
         client.cidade =  request.form.get('cidade')
+        client.email = request.form.get('email')
         client.observacao =  request.form.get('observacao')
+
+        client.save()
+
+        return redirect(url_for('.ClientAPI', id=id))
 
 
 bp.add_url_rule('/client/<id>', view_func=ClientAPI.as_view('ClientAPI'), methods=['GET', 'POST'])

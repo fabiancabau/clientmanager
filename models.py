@@ -50,6 +50,7 @@ class Client(db.Model):
     cep = db.Column(db.String(200))
     bairro = db.Column(db.String(200))
     cidade = db.Column(db.String(200))
+    email = db.Column(db.String(200))
     dt_cadastro = db.Column(db.DateTime, default=datetime.now())
     observacao = db.Column(db.Text)
 
