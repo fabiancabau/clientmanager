@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask import Blueprint
 from flask import redirect, request
 from flask.helpers import url_for, flash
@@ -73,7 +75,12 @@ class ClientAPIList(MethodView):
 
     def get(self, id=None):
 
-        return render_template('client_list.html')
+        if id:
+            clients = Client.query.filter_by(id=id)
+        else:
+            clients = Client.query.all()
+
+        return render_template('client_list.html', clients=clients)
 
 
 bp.add_url_rule('/clients', view_func=ClientAPIList.as_view('ClientAPIList'))

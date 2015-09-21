@@ -1,9 +1,10 @@
+
 {% extends "template.html" %}
 {% block content %}
 
 <div class="x_panel">
     <div class="x_title">
-        <h2>Stripped table <small>Stripped table subtitle</small></h2>
+        <h2>Clientes <small>Lista</small></h2>
         <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -27,30 +28,20 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    <th>Nome</th>
+                    <th>Razao Social</th>
+                    <th>E-mail</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {% for client in clients %}
+                    <tr>
+                        <th scope="row">{{ client.id }}</th>
+                        <td>{{ client.nome }}</td>
+                        <td>{{ client.razao_social }}</td>
+                        <td>{{ client.email }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
 
