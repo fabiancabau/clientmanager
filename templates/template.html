@@ -25,6 +25,7 @@
 
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/nprogress.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/notify/pnotify.core.js') }}"></script>
     <script>
         NProgress.start();
     </script>
@@ -80,9 +81,9 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-user"></i> Clientes <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="{{ url_for('.ClientAPIForm') }}">Cadastrar</a>
+                                        <li><a href="{{ url_for('client.ClientAPIForm') }}">Cadastrar</a>
                                         </li>
-                                        <li><a href="{{ url_for('.ClientAPIList') }}">Dashboard2</a>
+                                        <li><a href="{{ url_for('client.ClientAPIList') }}">Listar</a>
                                         </li>
                                     </ul>
                                 </li>

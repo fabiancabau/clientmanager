@@ -9,34 +9,21 @@ from flask.templating import render_template
 from flask.views import MethodView
 
 
-bp = Blueprint('client', __name__)
+bp = Blueprint('sale', __name__)
 
 
-class ClientAPIForm(MethodView):
+class SaleAPIForm(MethodView):
 
     def post(self):
-
-        client = Client()
-
-        client.nome =  request.form.get('nome')
-        client.razao_social =  request.form.get('razao_social')
-        client.rua =  request.form.get('rua')
-        client.cep =  request.form.get('cep')
-        client.bairro =  request.form.get('bairro')
-        client.cidade =  request.form.get('cidade')
-        client.email = request.form.get('email')
-        client.observacao =  request.form.get('observacao')
-
-        client.save()
 
         flash({"message": 'Cliente adicionado com sucesso!', "title": "Sucesso!"}, 'success')
         return redirect(url_for('.ClientAPIForm'))
 
     def get(self):
-        return render_template('client_add.html')
+        return render_template('sale_add.html')
 
 
-bp.add_url_rule('/client', view_func=ClientAPIForm.as_view('ClientAPIForm'))
+bp.add_url_rule('/sale', view_func=SaleAPIForm.as_view('SaleAPIForm'))
 
 
 class ClientAPI(MethodView):

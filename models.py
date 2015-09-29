@@ -39,6 +39,7 @@ class User(db.Model, UserMixin):
 
         return None
 
+
 class Client(db.Model):
 
     __tablename__ = 'client'

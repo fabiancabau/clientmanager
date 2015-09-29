@@ -11,11 +11,13 @@ from werkzeug.utils import secure_filename
 from models import db, User, Client
 import os
 from client import client
+from login import login
 
 application = Flask(__name__)
 application.debug = True
 application.register_blueprint(client.bp)
-application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@127.0.0.1/clientmanager'
+application.register_blueprint(login.bp)
+application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@127.0.0.1/clientmanager'
 application.secret_key = '0mG`itS4s3cr3t'
 
 # This is the path to the upload directory
