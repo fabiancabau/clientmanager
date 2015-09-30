@@ -12,17 +12,13 @@ from models import db, User, Client
 import os
 from client import client
 from login import login
+from config import Configuration
 
 application = Flask(__name__)
-application.debug = True
+application.config.from_object(Configuration)
+
 application.register_blueprint(client.bp)
 application.register_blueprint(login.bp)
-application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@127.0.0.1/clientmanager'
-application.secret_key = '0mG`itS4s3cr3t'
-
-# This is the path to the upload directory
-application.config['UPLOAD_FOLDER'] = 'static/uploads/'
-# These are the extension that we are accepting to be uploaded
 
 db.init_app(application)
 
@@ -33,39 +29,9 @@ login_manager.init_app(application)
 def load_user(userid):
     return User.get_user(userid)
 
-@application.route('/')
-def index():
-
-    return render_template('index.html')
-
-
-@application.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-
-        user = User.check_password(request.form.get('username'), request.form.get('password'))
-        if user:
-            login_user(user)
-            return redirect(url_for('admin'))
-        else:
-            return render_template('login.html')
-    else:
-        return render_template('login.html')
-
-
-@application.route('/admin', methods=['GET', 'POST'])
-@login_required
-def admin():
-
-    return render_template('admin.html')
-
-
-@application.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect('login')
-
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect(url_for('login.LoginAPIForm'))
 
 
 if __name__ == '__main__':

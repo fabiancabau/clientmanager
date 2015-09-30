@@ -7,6 +7,7 @@ from flask_login import login_required
 from models import Client, db
 from flask.templating import render_template
 from flask.views import MethodView
+from messages import ClientMessages
 
 
 bp = Blueprint('client', __name__)
@@ -14,6 +15,7 @@ bp = Blueprint('client', __name__)
 
 class ClientAPIForm(MethodView):
 
+    @login_required
     def post(self):
 
         client = Client()
@@ -29,9 +31,10 @@ class ClientAPIForm(MethodView):
 
         client.save()
 
-        flash({"message": 'Cliente adicionado com sucesso!', "title": "Sucesso!"}, 'success')
+        flash({"message": ClientMessages.CLIENT_ADD_SUCCESS['message'], "title": ClientMessages.CLIENT_ADD_SUCCESS['title']}, ClientMessages.CLIENT_ADD_SUCCESS['class'])
         return redirect(url_for('.ClientAPIForm'))
 
+    @login_required
     def get(self):
         return render_template('client_add.html')
 
@@ -41,6 +44,7 @@ bp.add_url_rule('/client', view_func=ClientAPIForm.as_view('ClientAPIForm'))
 
 class ClientAPI(MethodView):
 
+    @login_required
     def get(self, id=None):
 
         client = Client.query.get(id)
@@ -50,6 +54,7 @@ class ClientAPI(MethodView):
         else:
             return render_template('page_404.html')
 
+    @login_required
     def post(self, id=None):
 
         client = Client.query.get(id)
@@ -65,6 +70,8 @@ class ClientAPI(MethodView):
 
         client.save()
 
+        flash({"message": ClientMessages.CLIENT_UPDATE_SUCCESS['message'], "title": ClientMessages.CLIENT_UPDATE_SUCCESS['title']}, ClientMessages.CLIENT_UPDATE_SUCCESS['class'])
+
         return redirect(url_for('.ClientAPI', id=id))
 
 
@@ -73,6 +80,7 @@ bp.add_url_rule('/client/<id>', view_func=ClientAPI.as_view('ClientAPI'), method
 
 class ClientAPIList(MethodView):
 
+    @login_required
     def get(self, id=None):
 
         if id:
