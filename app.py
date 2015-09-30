@@ -14,25 +14,20 @@ from client import client
 from login import login
 from config import Configuration
 
-application = Flask(__name__)
-application.config.from_object(Configuration)
 
-application.register_blueprint(client.bp)
-application.register_blueprint(login.bp)
+def create_app():
+    application = Flask(__name__)
+    application.config.from_object(Configuration)
 
-db.init_app(application)
+    application.register_blueprint(client.bp)
+    application.register_blueprint(login.bp)
 
-login_manager = LoginManager()
-login_manager.init_app(application)
+    db.init_app(application)
 
-@login_manager.user_loader
-def load_user(userid):
-    return User.get_user(userid)
-
-@login_manager.unauthorized_handler
-def unauthorized():
-    return redirect(url_for('login.LoginAPIForm'))
+    login.login_manager.init_app(application)
+    return application
 
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0', port=os.environ.get('$PORT') or 2000)
+    app = create_app()
+    app.run(host='0.0.0.0', port=os.environ.get('$PORT') or 2000)

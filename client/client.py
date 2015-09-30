@@ -7,7 +7,7 @@ from flask_login import login_required
 from models import Client, db
 from flask.templating import render_template
 from flask.views import MethodView
-from messages import ClientMessages
+from messages import ClientMessages, CssMessages
 
 
 bp = Blueprint('client', __name__)
@@ -31,7 +31,7 @@ class ClientAPIForm(MethodView):
 
         client.save()
 
-        flash({"message": ClientMessages.CLIENT_ADD_SUCCESS['message'], "title": ClientMessages.CLIENT_ADD_SUCCESS['title']}, ClientMessages.CLIENT_ADD_SUCCESS['class'])
+        flash(ClientMessages.CLIENT_ADD_SUCCESS, CssMessages.SUCCESS)
         return redirect(url_for('.ClientAPIForm'))
 
     @login_required
@@ -70,7 +70,7 @@ class ClientAPI(MethodView):
 
         client.save()
 
-        flash({"message": ClientMessages.CLIENT_UPDATE_SUCCESS['message'], "title": ClientMessages.CLIENT_UPDATE_SUCCESS['title']}, ClientMessages.CLIENT_UPDATE_SUCCESS['class'])
+        flash(ClientMessages.CLIENT_UPDATE_SUCCESS, 'success')
 
         return redirect(url_for('.ClientAPI', id=id))
 

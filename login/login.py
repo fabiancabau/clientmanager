@@ -8,10 +8,19 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 from models import User, db
 from flask.templating import render_template
 from flask.views import MethodView
-
+from messages import LoginMessages, CssMessages
 
 bp = Blueprint('login', __name__)
 
+login_manager = LoginManager()
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.get_user(userid)
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect(url_for('login.LoginAPIForm'))
 
 class LoginAPIForm(MethodView):
 
@@ -23,7 +32,7 @@ class LoginAPIForm(MethodView):
             session['username'] = user.username
             return redirect(url_for('client.ClientAPIList'))
         else:
-            flash({'message': u'Usuario inválido/Não existente!', 'title': u'Erro'}, 'error')
+            flash(LoginMessages.LOGIN_ERROR, CssMessages.ERROR)
             return render_template('login.html')
 
     def get(self):
