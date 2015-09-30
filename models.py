@@ -63,6 +63,10 @@ class Client(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    @classmethod
+    def get_client(cls, id):
+        return Client.query.get(id)
+
 
 # class Charge(db.Model):
 #

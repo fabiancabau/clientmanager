@@ -12,6 +12,7 @@ from models import db, User, Client
 import os
 from client import client
 from login import login
+from sale import sale
 from config import Configuration
 
 
@@ -21,6 +22,7 @@ def create_app():
 
     application.register_blueprint(client.bp)
     application.register_blueprint(login.bp)
+    application.register_blueprint(sale.bp)
 
     db.init_app(application)
 

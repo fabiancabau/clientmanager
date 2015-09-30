@@ -24,12 +24,9 @@
     <link href="{{ url_for('static', filename='css/floatexamples.css') }}" rel="stylesheet" type="text/css" />
 
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/nprogress.js') }}"></script>
     <script src="{{ url_for('static', filename='js/notify/pnotify.core.js') }}"></script>
-    <script>
-        NProgress.start();
-    </script>
-    
+
+
     <!--[if lt IE 9]>
         <script src="{{ url_for('static', filename='js/ie8-responsive-file-warning.js') }}"></script>
         <![endif]-->
@@ -273,12 +270,11 @@
     <!-- flot js -->
     <!--[if lte IE 8]><script type="text/javascript" src="{{ url_for('static', filename='js/excanvas.min.js') }}"></script><![endif]-->
     <script type="text/javascript" src="{{ url_for('static', filename='js/flot/date.js') }}"></script>
-    <
-    <script>
-        $(document).ready(function () {
 
-        });
-    </script>
+
+
+    {% block js %}
+    {% endblock %}
 </body>
 
 </html>

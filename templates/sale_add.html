@@ -1,0 +1,102 @@
+{% extends "template.html" %}
+{% block content %}
+
+    <div class="x_panel">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <script type="text/javascript">
+                        $(function(){
+                            new PNotify({
+                                title: '{{ message.title }}',
+                                text: '{{ message.message }}',
+                                type: '{{ category }}',
+                                delay: 3000
+                            });
+                        });
+                    </script>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+
+        <div class="x_title">
+            <h2>Pedido</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br />
+            <form class="form-horizontal form-label-left input_mask" action="/client" method="POST">
+
+                <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+                    <input type="text" class="form-control has-feedback-left" name="date" id="calendar">
+                    <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+                    <input type="text" class="form-control has-feedback-left" id="inputSuccess3" name="razao_social" placeholder="0,00">
+                    <span class="form-control-feedback left" aria-hidden="true">R$</span>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+                    <select class="form-control has-feedback-left" id="inputSuccess3" name="tipo_pagamento">
+                        <option>Duplicata</option>
+                        <option>Cheque</option>
+                        <option>Cartão</option>
+                        <option>Dinheiro</option>
+                    </select>
+                    <span class="fa fa-briefcase form-control-feedback left" aria-hidden="true"></span>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="ln_solid"></div>
+
+                <div class="form-group">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <button type="submit" class="btn btn-primary">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Enviar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('#calendar').daterangepicker({
+                singleDatePicker: true,
+                locale: {
+                    "format": "DD/MM/YYYY",
+                    "daysOfWeek": [
+                        "Su",
+                        "Mo",
+                        "Tu",
+                        "We",
+                        "Th",
+                        "Fr",
+                        "Sa"
+                    ],
+                    "monthNames": [
+                        "Janeiro",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ]
+                }
+            });
+        });
+    </script>
+{% endblock %}
