@@ -1,0 +1,34 @@
+.container {
+    width: 1024px;
+    margin: 0px auto;
+}
+
+.menu a {
+    outline: 0;
+}
+
+.menu {
+	width: 100%;
+	height: 40px;
+	background: #444;
+}
+
+.menu > ul {
+	list-style: none;
+    float:right;
+    margin-top:10px;
+}
+
+.menu > ul > li {
+	display: inline-block;
+    width:100px;
+}
+
+.menu > ul > li > a {
+	color: #FFF;
+	opacity: 0.75
+}
+
+.menu > ul > li > a:hover {
+	opacity: 1
+}

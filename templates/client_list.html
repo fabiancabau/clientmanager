@@ -26,7 +26,10 @@
                         <td>{{ client.nome }}</td>
                         <td>{{ client.razao_social }}</td>
                         <td>{{ client.email }}</td>
-                        <td><a href="#/shopping-cart"><i class="fa fa-shopping-cart"></i></a></td>
+                        <td>
+                            <a href="/client/{{ client.id }}"><i class="fa fa-edit"></i></a>
+                            <!-- <a href="/client/delete/{{ client.id }}"><i class="fa fa-trash"></i></a> -->
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
